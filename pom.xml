@@ -7,7 +7,7 @@
     <artifactId>yyg-blog</artifactId>
     <!-- version-->
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>yyg-blog</name>
     <description>yyg-blog</description>
@@ -20,8 +20,6 @@
     </parent>
 
     <properties>
-        <docker.image.prefix>blog</docker.image.prefix>
-        <docker.plugin.version>0.3.258</docker.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -152,6 +150,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+        <!-- 部署到外部tomcat -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
