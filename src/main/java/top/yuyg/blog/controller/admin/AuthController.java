@@ -1,5 +1,7 @@
 package top.yuyg.blog.controller.admin;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import top.yuyg.blog.constant.WebConst;
 import top.yuyg.blog.controller.BaseController;
 import top.yuyg.blog.dto.LogActions;
@@ -8,6 +10,8 @@ import top.yuyg.blog.model.Bo.RestResponseBo;
 import top.yuyg.blog.model.Vo.UserVo;
 import top.yuyg.blog.service.ILogService;
 import top.yuyg.blog.service.IUserService;
+import top.yuyg.blog.service.MailService;
+import top.yuyg.blog.utils.IPKit;
 import top.yuyg.blog.utils.TaleUtils;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -16,10 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import top.yuyg.blog.dto.LogActions;
-import top.yuyg.blog.model.Bo.RestResponseBo;
-import top.yuyg.blog.model.Vo.UserVo;
-import top.yuyg.blog.utils.TaleUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -43,6 +43,13 @@ public class AuthController extends BaseController {
 
     @Resource
     private ILogService logService;
+
+    @Autowired
+    private MailService mailService;
+
+    @Value("${spring.mail.loginRemain}")
+    private String receive;
+
 
     @GetMapping(value = "/login")
     public String login() {
@@ -79,6 +86,7 @@ public class AuthController extends BaseController {
             }
             return RestResponseBo.fail(msg);
         }
+        mailService.sendSimple(receive,"网站登录提醒","您的网站YUYG.TOP管理后台在IP为："+ IPKit.getIpAddrByRequest(request)+"的主机上登录，若非本人操作，请及时修改密码！");
         return RestResponseBo.ok();
     }
 
