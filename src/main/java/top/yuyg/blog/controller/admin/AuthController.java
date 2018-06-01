@@ -86,7 +86,8 @@ public class AuthController extends BaseController {
             }
             return RestResponseBo.fail(msg);
         }
-        mailService.sendSimple(receive,"网站登录提醒","您的网站YUYG.TOP管理后台在IP为："+ IPKit.getIpAddrByRequest(request)+"的主机上登录，若非本人操作，请及时修改密码！");
+        //网站未正式启用，先注释掉登陆邮箱提醒
+        //mailService.sendSimple(receive,"网站登录提醒","您的网站YUYG.TOP管理后台在IP为："+ IPKit.getIpAddrByRequest(request)+"的主机上登录，若非本人操作，请及时修改密码！");
         return RestResponseBo.ok();
     }
 
