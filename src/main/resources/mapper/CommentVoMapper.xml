@@ -416,4 +416,7 @@
       parent = #{parent,jdbcType=INTEGER}
     where coid = #{coid,jdbcType=INTEGER}
   </update>
+  <select id="getUnmanagedCount" resultType="java.lang.Integer">
+    select count(1) from t_comments WHERE status = 'not_audit'
+  </select>
 </mapper>

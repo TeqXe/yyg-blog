@@ -124,6 +124,11 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
+    public int getUnmanagedCount() {
+        return commentDao.getUnmanagedCount();
+    }
+
+    @Override
     @Transactional
     public void delete(Integer coid, Integer cid) {
         if (null == coid) {

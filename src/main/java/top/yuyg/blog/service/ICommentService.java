@@ -60,4 +60,10 @@ public interface ICommentService {
      */
     void update(CommentVo comments);
 
+    /**
+     * 获取未处理的评论计数
+     * @return
+     */
+    int getUnmanagedCount();
+
 }

@@ -38,4 +38,6 @@ public interface CommentVoMapper {
     int updateByPrimaryKeyWithBLOBs(CommentVo record);
 
     int updateByPrimaryKey(CommentVo record);
+
+    int getUnmanagedCount();
 }
