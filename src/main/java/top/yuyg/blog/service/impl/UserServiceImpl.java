@@ -83,4 +83,9 @@ public class UserServiceImpl implements IUserService {
             throw new TipException("update user by uid and retrun is not one");
         }
     }
+
+    @Override
+    public String getWhiteIpAdress(String username) {
+        return userDao.getWhiteIpAddress(username);
+    }
 }

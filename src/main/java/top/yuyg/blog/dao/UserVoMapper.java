@@ -31,4 +31,6 @@ public interface UserVoMapper {
     int updateByPrimaryKeySelective(UserVo record);
 
     int updateByPrimaryKey(UserVo record);
+
+    String getWhiteIpAddress(String username);
 }

@@ -86,9 +86,28 @@ public class AuthController extends BaseController {
             }
             return RestResponseBo.fail(msg);
         }
-        //网站未正式启用，先注释掉登陆邮箱提醒
-        //mailService.sendSimple(receive,"网站登录提醒","您的网站YUYG.TOP管理后台在IP为："+ IPKit.getIpAddrByRequest(request)+"的主机上登录，若非本人操作，请及时修改密码！");
+        //若登录IP不在白名单内，则发送邮件通知 at 2018/6/9
+        if(checkIfSendEmail(username,request)){
+            mailService.sendSimple(receive,"网站登录提醒","您的网站YUYG.TOP管理后台在IP为："+ IPKit.getIpAddrByRequest(request)+"的主机上登录，若非本人操作，请及时修改密码！");
+        }
         return RestResponseBo.ok();
+    }
+
+    /**
+     * 查看登录ip是否在白名单内，若不在，则发送该邮件通知站长，后台登录
+     * @param username
+     * @param request
+     * @return
+     */
+    private boolean checkIfSendEmail(String username, HttpServletRequest request) {
+        boolean ifSend  = true;
+        String requestIp = IPKit.getIpAddrByRequest(request);
+        String whiteIp = usersService.getWhiteIpAdress(username);
+        if (whiteIp.indexOf(requestIp) > 0){
+            //ip存在于白名单中
+            ifSend = false;
+        }
+        return ifSend;
     }
 
     /**

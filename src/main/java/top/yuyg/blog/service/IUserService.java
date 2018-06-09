@@ -38,4 +38,9 @@ public interface IUserService {
      * @return
      */
     void updateByUid(UserVo userVo);
+
+    /**
+     *获取白名单
+     */
+    String getWhiteIpAdress(String username);
 }

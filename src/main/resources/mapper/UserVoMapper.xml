@@ -296,4 +296,9 @@
       group_name = #{groupName,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
+  <select id="getWhiteIpAddress" parameterType="java.lang.String" resultType="java.lang.String">
+    select ip_whitelist
+    from t_users
+    where username = #{username}
+  </select>
 </mapper>
