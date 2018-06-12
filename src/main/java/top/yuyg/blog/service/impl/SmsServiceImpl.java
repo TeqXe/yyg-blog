@@ -4,6 +4,7 @@ import com.github.qcloudsms.SmsMultiSender;
 import com.github.qcloudsms.SmsMultiSenderResult;
 import com.github.qcloudsms.httpclient.HTTPException;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import top.yuyg.blog.service.ISmsService;
@@ -51,12 +52,19 @@ public class SmsServiceImpl implements ISmsService{
     public String loginVerifySms(String captcha) {
         // 指定模板ID单发短信
         try {
-            String[] params = {captcha};
-            String[] phoneNumbers = {phoneNumber};
+            String[] params = new String[]{captcha};
+            String[] phoneNumbers = new String[]{phoneNumber};
             SmsMultiSender msender = new SmsMultiSender(appid, appkey);
             SmsMultiSenderResult result =  msender.sendWithParam("86", phoneNumbers,
                     templateId, params, smsSign, "", "");  // 签名参数未提供或者为空时，会使用默认签名发送短信
             System.out.print(result);
+            //String result = "{\"result\":0,\"errmsg\":\"OK\",\"ext\":\"\",\"detail\":[{\"result\":0,\"errmsg\":\"OK\",\"mobile\":\"*********\",\"nationcode\":\"86\",\"sid\":\"8:92jq1fHb7XuFkU29iGc20180612\",\"fee\":1}]}";
+            JSONObject resultObj = new JSONObject(result.toString().trim());
+            if ("OK".equalsIgnoreCase((String) resultObj.get("errmsg"))){
+                return "success";
+            } else {
+                return "error";
+            }
         } catch (HTTPException e) {
             // HTTP响应码错误
             e.printStackTrace();
@@ -70,6 +78,5 @@ public class SmsServiceImpl implements ISmsService{
             e.printStackTrace();
             return "error";
         }
-        return "success";
     }
 }

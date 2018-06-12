@@ -1,6 +1,8 @@
 package top.yuyg.blog.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.util.StringUtil;
+import org.springframework.beans.factory.annotation.Value;
 import top.yuyg.blog.constant.WebConst;
 import top.yuyg.blog.dto.ErrorCode;
 import top.yuyg.blog.dto.MetaDto;
@@ -11,10 +13,7 @@ import top.yuyg.blog.model.Bo.RestResponseBo;
 import top.yuyg.blog.model.Vo.CommentVo;
 import top.yuyg.blog.model.Vo.ContentVo;
 import top.yuyg.blog.model.Vo.MetaVo;
-import top.yuyg.blog.service.ICommentService;
-import top.yuyg.blog.service.IContentService;
-import top.yuyg.blog.service.IMetaService;
-import top.yuyg.blog.service.ISiteService;
+import top.yuyg.blog.service.*;
 import top.yuyg.blog.utils.IPKit;
 import top.yuyg.blog.utils.PatternKit;
 import top.yuyg.blog.utils.TaleUtils;
@@ -65,6 +64,12 @@ public class IndexController extends BaseController {
 
     @Resource
     private ISiteService siteService;
+
+    @Resource
+    private ISmsService iSmsService;
+
+    @Value(value = "${sms.defaultReceiver}")
+    private String defaultReceiver;
 
     /**
      * 首页
@@ -446,6 +451,43 @@ public class IndexController extends BaseController {
         }
         cache.hset(Types.HITS_FREQUENCY.getType(), val, 1, WebConst.HITS_LIMIT_TIME);
         return false;
+    }
+
+    /**
+     * 发送短信验证码至站长手机以验证登陆
+     * @return
+     */
+    @PostMapping(value = "sendSmsCaptcha")
+    @ResponseBody
+    public RestResponseBo smsVerify(HttpServletRequest request, HttpServletResponse response){
+        //页面填写的手机号
+        String phone = request.getParameter("phoneNum");
+        //防止网站被人恶意刷短信验证
+        if (StringUtil.isEmpty(phone)){
+            return RestResponseBo.fail("手机号为空!");
+        }else if (!phone.equals(defaultReceiver)){
+            return RestResponseBo.fail("手机号非法!");
+        }
+        //生成随机验证码
+        String randomCode = generateCode();
+        System.out.println("生成的随机验证码："+randomCode);
+        //将生成的code存储至session
+        request.getSession().setAttribute("smsCode",randomCode);
+        //发送调用api发送验证码至手机
+        String result = iSmsService.loginVerifySms(randomCode);
+        if ("success".equalsIgnoreCase(result)){
+            return RestResponseBo.ok();
+        } else {
+            return RestResponseBo.fail("发送验证码失败！请稍后再试！");
+        }
+    }
+
+    /**
+     * 随机生成六位验证码
+     * @return
+     */
+    private String generateCode(){
+        return String.valueOf((int)((Math.random()*9+1)*100000));
     }
 
 }
