@@ -33,8 +33,8 @@ public class CheckCommentTask {
     public void demo(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         int count = iCommentService.getUnmanagedCount();
-        if(count >= 20){
-            //mailService.sendSimple(receive,"评论审核提醒","温馨提示，截止"+ sdf.format(new Date())+",您的网站博客共有"+count+"条评论尚未被审核！请及时登录处理！");
+        if(count >= 10){
+            mailService.sendSimple(receive,"评论审核提醒","温馨提示，截止"+ sdf.format(new Date())+",您的网站博客共有"+count+"条评论尚未被审核！请及时登录处理！");
         }
         System.out.println("截止"+ sdf.format(new Date())+",有"+count+"条评论尚未被审核！请及时处理！");
     }
