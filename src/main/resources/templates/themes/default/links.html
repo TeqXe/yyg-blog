@@ -6,6 +6,8 @@
     <div id="post-content" class="post-content">
         <h3>友情链接</h3>
         <ul class="flinks">
+            <!--/*@thymesVar id="links" type="java.util.List<top.yuyg.blog.model.Vo.MetaVo>"*/-->
+            <!--/*@thymesVar id="link" type="top.yuyg.blog.model.Vo.MetaVo"*/-->
             <th:block th:each="link : ${links}">
                 <li>🔒 <a th:href="${link.slug}" target="_blank" th:text="${link.name}"></a></li>
             </th:block>

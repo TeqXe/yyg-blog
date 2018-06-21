@@ -5,6 +5,7 @@
     <div class="footer-social">
         <div class="footer-container clearfix">
             <div class="social-list">
+                <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                 <th:block th:each="index:${commons.social()}">
                     <th:block th:if="${index.value}!=null and ${index.value}!=''">
                         <th:block th:switch="${index.key}">
@@ -36,6 +37,7 @@
                 <div class="meta-copyright-info">
                     <div class="info-text">
                         <a href="http://www.yuyg.top" style="display: block;margin: 0 auto;" class="info-logo">
+                            <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                             <img style="display: block;margin: 0 auto;" th:src="@{/user/img/logo.png}"
                                  th:alt="${commons.site_title()}"/>
                         </a>
@@ -44,6 +46,7 @@
                                           rel="nofollow">YYG Blog</a> 保留一切权利
                         </p>
                         <br/>
+                        <!--/*@thymesVar id="option" type="top.yuyg.blog.model.Vo.OptionVo"*/-->
                         <th:block th:if="${option}!=null and ${option.getValue()}!=''">
                             <p th:text="${option.getValue()}"></p>
                         </th:block>
@@ -62,6 +65,7 @@
     </div>
 </footer>
 
+<!--/*@thymesVar id="is_post" type="java.lang.Boolean"*/-->
 <th:block th:if="${is_post}">
     <div id="directory-content" class="directory-content">
         <div id="directory"></div>

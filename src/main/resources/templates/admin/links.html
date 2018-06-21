@@ -23,6 +23,8 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <!--/*@thymesVar id="links" type="java.util.List"*/-->
+                            <!--/*@thymesVar id="link" type="top.yuyg.blog.model.Vo.MetaVo"*/-->
                             <th:block th:each="link : ${links}">
                                 <tr th:attr="mid=${link.mid}">
                                     <td th:text="${link.name}"></td>

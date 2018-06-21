@@ -26,10 +26,13 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <!--/*@thymesVar id="articles" type="com.github.pagehelper.PageInfo"*/-->
+                            <!--/*@thymesVar id="post" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
                             <th:block th:each="post : ${articles.list}">
                                 <tr th:cid="${post.cid}">
                                     <td th:text="${post.title}"></td>
                                     <td th:text="${post.slug}"></td>
+                                    <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                     <td th:text="${commons.fmtdate(post.created, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                     <td>
                                         <th:block th:if="${post.status == 'publish'}" th:text="已发布"/>

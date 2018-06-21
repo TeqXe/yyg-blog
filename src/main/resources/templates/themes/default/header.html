@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-transform"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
     <meta name="keywords" th:content="${keywords ?: commons.site_option('site_keywords')}"/>
+    <!--/*@thymesVar id="description" type="java.lang.String"*/-->
     <meta name="description" th:content="${description ?:commons.site_option('site_description')}"/>
     <link rel="shortcut icon" th:href="@{/user/img/favicon.png}"/>
     <link rel="apple-touch-icon" th:href="@{/user/img/apple-touch-icon.png}"/>
@@ -32,6 +34,7 @@
     </script>
 
 </head>
+<!--/*@thymesVar id="is_post" type="java.lang.Boolean"*/-->
 <body  gtools_scp_screen_capture_injected="true" th:class="${is_post}?'':'bg-grey'">
 <!--[if lt IE 8]>
 <div class="browsehappy" role="dialog">
@@ -40,6 +43,7 @@
 <![endif]-->
 <header id="header" class="header bg-white">
     <div class="navbar-container">
+        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
         <a th:href="${commons.site_url('/')}" class="navbar-logo">
             <img th:src="@{/user/img/logo.png}" alt="首页"/>
         </a>

@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <ol class="page-navigator" th:fragment="pageNav(pageInfo, prevText, nextText, prefix)">
+    <!--/*@thymesVar id="pageInfo" type="com.github.pagehelper.PageInfo"*/-->
     <th:block th:if="${pageInfo.hasPreviousPage}">
         <li class="prev"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.prePage}}" th:text="${prevText}"></a></li>
     </th:block>
@@ -22,6 +23,7 @@
 <div th:fragment="pageAdminNav(pageInfo)">
     <div class="clearfix">
         <ul class="pagination m-b-5 pull-right">
+            <!--/*@thymesVar id="pageInfo" type="com.github.pagehelper.PageInfo"*/-->
             <li th:if="${pageInfo.hasPreviousPage}">
                 <a th:href="@{'?page='+${pageInfo.prePage}}" aria-label="Previous">
                     <i class="fa fa-angle-left"></i>&nbsp;上一页

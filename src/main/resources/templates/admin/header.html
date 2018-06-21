@@ -55,6 +55,7 @@
 
                 <ul class="nav navbar-nav navbar-right pull-right">
                     <li class="dropdown">
+                        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                         <a th:href="@{index.html}" class="dropdown-toggle profile" data-toggle="dropdown"
                            aria-expanded="true"><img th:src="${commons.gravatar(session.login_user.email)}" alt="user-img"
                                                      class="img-circle"/> </a>
@@ -75,6 +76,7 @@
     <div class="sidebar-inner slimscrollleft">
         <div id="sidebar-menu">
             <ul>
+                <!--/*@thymesVar id="active" type="java.lang.String"*/-->
                 <li th:class="${active}=='home'?'active':''">
                     <a th:href="@{/admin/index}"
                        th:class="${active}=='home'?'waves-effect active':'waves-effect'"><i

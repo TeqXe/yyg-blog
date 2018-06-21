@@ -66,6 +66,8 @@
                         </div>
                     </div>
                     <div class="col-md-12 attach">
+                        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
+                        <!--/*@thymesVar id="attachs" type="com.github.pagehelper.PageInfo"*/-->
                         <th:block th:if="${commons.is_empty(attachs)}">
                             <div class="row">
                                 <div class="col-md-4 text-center">
@@ -78,9 +80,10 @@
                         <th:block th:unless="${commons.is_empty(attachs)}">
                             <th:block th:each="attach : ${attachs.list}">
                                 <div class="col-md-2 text-center m-t-10">
+                                    <!--/*@thymesVar id="attach" type="top.yuyg.blog.model.Vo.AttachVo"*/-->
                                     <a th:href="${commons.site_url(attach.fkey)}" target="_blank">
                                         <img class="attach-img"
-                                             th:src="@{${attach.ftype == 'image'}?${attach.fkey}: '/admin/images/attach.png'}"
+                                             th:src="${attach.ftype == 'image'}?${attach.fkey}: '/admin/images/attach.png'"
                                              th:title="${attach.fname}"/>
                                     </a>
                                     <div class="clearfix m-t-10">

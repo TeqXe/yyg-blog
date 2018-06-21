@@ -24,12 +24,15 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <!--/*@thymesVar id="articles" type="com.github.pagehelper.PageInfo"*/-->
                             <th:block th:each="post : ${articles.list}">
+                                <!--/*@thymesVar id="post" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
                                 <tr th:cid="${post.cid}">
                                     <td>
                                         <a th:href="@{'/admin/article/'+${post.cid}}" th:text="${post.title}"></a>
                                     </td>
-                                    <td><th:block th:text="${commons.fmtdate(post.created, 'yyyy-MM-dd HH:mm:ss')}"/></td>
+                                    <td><!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
+                                    <th:block th:text="${commons.fmtdate(post.created, 'yyyy-MM-dd HH:mm:ss')}"/></td>
                                     <td><th:block th:text="${post.hits}"/></td>
                                     <td><th:block th:text="${post.categories}"/></td>
                                     <td>
@@ -47,6 +50,7 @@
                                         <a href="javascript:void(0)" th:onclick="'delPost('+${post.cid}+');'"
                                            class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
                                                 class="fa fa-trash-o"></i> <span>删除</span></a>
+                                        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                         <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5" th:href="${commons.permalink(post)}+'/preview'"
                                            target="_blank"><i
                                                 class="fa fa-rocket"></i> <span>预览</span></a>
@@ -56,6 +60,7 @@
 
                             </tbody>
                         </table>
+                        <!--/*@thymesVar id="articles" type="com.github.pagehelper.PageInfo"*/-->
                         <div th:replace="comm/macros :: pageAdminNav(${articles})"></div>
                     </div>
                 </div>

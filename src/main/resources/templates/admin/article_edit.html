@@ -31,6 +31,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h4 class="page-title">
+                            <!--/*@thymesVar id="contents" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
                             <th:block th:if="${null != contents}">
                                 编辑文章
                             </th:block>
@@ -42,6 +43,7 @@
                     <div class="col-md-12">
                         <form id="articleForm" role="form" novalidate="novalidate">
                             <input type="hidden" name="categories" id="categories"/>
+                            <!--/*@thymesVar id="contents" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
                             <input type="hidden" name="cid"
                                    th:value="${contents!=null and contents.cid!=null}?${contents.cid}: ''" id="cid"/>
                             <input type="hidden" name="status"
@@ -79,11 +81,14 @@
                             <div class="form-group col-md-6">
                                 <select id="multiple-sel" class="select2 form-control" multiple="multiple"
                                         data-placeholder="请选择分类...">
+                                    <!--/*@thymesVar id="categories" type="java.util.List<top.yuyg.blog.model.Vo.MetaVo>"*/-->
                                     <th:block th:if="${null == categories}">
                                         <option value="默认分类" selected="selected">默认分类</option>
                                     </th:block>
                                     <th:block th:unless="${null == categories}">
+                                        <!--/*@thymesVar id="c" type="top.yuyg.blog.model.Vo.MetaVo"*/-->
                                         <th:block th:each="c : ${categories}">
+                                            <!--/*@thymesVar id="adminCommons" type="top.yuyg.blog.utils.AdminCommons"*/-->
                                             <option th:value="${c.name}" th:text="${c.name}"
                                                     th:selected="${null !=contents and adminCommons.exist_cat(c, contents.categories)}?true:false"></option>
                                         </th:block>

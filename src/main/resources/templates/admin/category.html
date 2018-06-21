@@ -17,9 +17,12 @@
                                 <h1 class="panel-title">分类列表</h1>
                             </div>
                             <div class="panel-body">
+                                <!--/*@thymesVar id="categories" type="java.util.List"*/-->
+                                <!--/*@thymesVar id="c" type="top.yuyg.blog.dto.MetaDto"*/-->
                                 <th:block th:each="c : ${categories}">
                                     <div class="btn-group m-b-10">
                                         <th:block th:if="${c.name == '默认分类'}">
+                                            <!--/*@thymesVar id="adminCommons" type="top.yuyg.blog.utils.AdminCommons"*/-->
                                             <button type="button"
                                                     th:class="'btn btn-'+${adminCommons.rand_color()}+' waves-effect waves-light'">
                                                 <th:block th:text="${c.name}"/>
@@ -27,6 +30,7 @@
                                             </button>
                                         </th:block>
                                         <th:block th:unless="${c.name == '默认分类'}">
+                                            <!--/*@thymesVar id="adminCommons" type="top.yuyg.blog.utils.AdminCommons"*/-->
                                             <button type="button"
                                                     th:class="'btn btn-'+${adminCommons.rand_color()}+' dropdown-toggle waves-effect waves-light'"
                                                     data-toggle="dropdown" aria-expanded="false">
@@ -54,8 +58,11 @@
                                 <h1 class="panel-title">标签列表</h1>
                             </div>
                             <div class="panel-body">
+                                <!--/*@thymesVar id="tags" type="java.util.List"*/-->
+                                <!--/*@thymesVar id="c" type="top.yuyg.blog.dto.MetaDto"*/-->
                                 <th:block th:each="c : ${tags}">
                                     <div class="btn-group m-b-10">
+                                        <!--/*@thymesVar id="adminCommons" type="top.yuyg.blog.utils.AdminCommons"*/-->
                                         <button type="button"
                                                 th:class="'btn btn-'+${adminCommons.rand_color()}+' dropdown-toggle waves-effect waves-light'"
                                                 data-toggle="dropdown" aria-expanded="false">

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="keyword" type="java.lang.String"*/-->
 <div th:replace="themes/default/header::header(${keyword},null)"></div>
 <body>
 <div class="main-content common-page clearfix">
     <div class="categorys-item">
         <div class="common-title">
+            <!--/*@thymesVar id="type" type="java.lang.String"*/-->
             <th:block th:text="${type}"/> : <th:block th:text="${keyword}"/>
         </div>
+        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
+        <!--/*@thymesVar id="articles" type="com.github.pagehelper.PageInfo<top.yuyg.blog.model.Vo.ContentVo>"*/-->
         <th:block th:if="${commons.is_empty(articles)}">
             <div>
                 <p>抱歉，还没有相关文章.</p>
@@ -20,11 +24,13 @@
                             <div class="post-list-item-container ">
                                 <div class="item-label ">
                                     <div class="item-title">
+                                        <!--/*@thymesVar id="article" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
                                         <a th:href="${commons.permalink(article)}" th:text="${article.title}"></a>
                                     </div>
                                     <div class="item-meta clearfix">
+                                        <!--/*@thymesVar id="article" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
                                         <div th:class="'item-meta-ico '+${commons.show_icon(article.cid)} "
-                                             th:style="'background: url('+@{/user/img/bg-ico.png}+') no-repeat;background-size: 40px auto;'"></div>
+                                             th:style="'background: url(/user/img/bg-ico.png); no-repeat;background-size: 40px auto;'"></div>
                                         <div class="item-meta-date">发布于 <th:block th:text="${commons.fmtdate(article.created)}"/></div>
                                     </div>
                                 </div>

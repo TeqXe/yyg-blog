@@ -4,7 +4,9 @@
 <body>
 <div class="main-content archive-page clearfix">
     <div class="categorys-item">
+        <!--/*@thymesVar id="archives" type="java.util.List<top.yuyg.blog.model.Bo.ArchiveBo>"*/-->
         <th:block th:each="archive : ${archives}">
+            <!--/*@thymesVar id="archive" type="top.yuyg.blog.model.Bo.ArchiveBo"*/-->
             <div class="categorys-title" th:text="${archive.date}"></div>
             <div class="post-lists">
                 <div class="post-lists-body">
@@ -13,9 +15,11 @@
                             <div class="post-list-item-container">
                                 <div class="item-label">
                                     <div class="item-title">
+                                        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                         <a th:href="${commons.permalink(article.cid, article.slug)}" th:text="${article.title}"></a>
                                     </div>
                                     <div class="item-meta clearfix">
+                                        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                         <div class="item-meta-date">发布于 <th:block th:text="${commons.fmtdate(article.created)}"/></div>
                                     </div>
                                 </div>

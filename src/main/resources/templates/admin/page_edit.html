@@ -12,6 +12,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h4 class="page-title">
+                            <!--/*@thymesVar id="contents" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
                             <th:block th:if="${null != contents}">
                                 编辑页面
                             </th:block>
@@ -23,6 +24,7 @@
                     <div class="col-md-12">
                         <form id="articleForm" role="form" novalidate="novalidate">
                             <input type="hidden" name="categories" id="categories"/>
+                            <!--/*@thymesVar id="contents" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
                             <input type="hidden" name="cid" th:value="${contents!=null and contents.cid!=null}?${contents.cid}: ''" id="cid"/>
                             <input type="hidden" name="status" th:value="${contents!=null and contents.status !=null}?${contents.status}: 'publish'" id="status"/>
                             <input type="hidden" name="content" id="content-editor"/>

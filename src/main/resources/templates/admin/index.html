@@ -12,6 +12,7 @@
                         <h4 class="page-title">仪表盘</h4>
                     </div>
 
+                    <!--/*@thymesVar id="statistics" type="top.yuyg.blog.model.Bo.StatisticsBo"*/-->
                     <div class="row">
                         <div class="col-sm-6 col-lg-3">
                             <div class="mini-stat clearfix bx-shadow bg-info">
@@ -58,9 +59,12 @@
                                 </div>
                                 <div class="panel-body">
                                     <ul class="list-group">
+                                        <!--/*@thymesVar id="articles" type="java.util.List"*/-->
+                                        <!--/*@thymesVar id="article" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
                                         <li class="list-group-item" th:each="article : ${articles}">
                             <span class="badge badge-primary"
                                   th:title="${article.commentsNum}+'条评论'" th:text="${article.commentsNum}"></span>
+                                            <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                             <a target="_blank" th:href="${commons.site_url('/article/')}+${article.cid}"
                                                th:text="${article.title}"></a>
                                         </li>
@@ -74,6 +78,7 @@
                                     <h4 class="panel-title">最新留言</h4>
                                 </div>
                                 <div class="panel-body">
+                                    <!--/*@thymesVar id="comments" type="java.util.List"*/-->
                                     <div th:if="${comments}== null and ${#lists.size(comments)}==0">
                                         <div class="alert alert-warning">
                                             还没有收到留言.
@@ -81,13 +86,15 @@
                                     </div>
                                     <ul class="list-group"
                                         th:unless="${comments}==null and ${#lists.size(comments)}==0">
+                                        <!--/*@thymesVar id="comment" type="top.yuyg.blog.model.Vo.CommentVo"*/-->
                                         <li class="list-group-item" th:each="comment : ${comments}">
                                             <div th:if="${comment.url}!=null and ${comment.url}!=''">
                                                 <a th:href="@{${comment.url}}" target="_blank"
                                                    th:text="${comment.author}"></a>
                                             </div>
                                             <th:block th:unless="${comment.url}!=null and ${comment.url}!=''" th:text="${comment.author}"/>
-                                            于<th:block th:text="${commons.fmtdate(comment.created,'MM月dd日HH:mm')}"/>：<a
+                                            于<!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
+                                            <th:block th:text="${commons.fmtdate(comment.created,'MM月dd日HH:mm')}"/>：<a
                                                 th:href="${commons.site_url('/article/')}+${comment.cid}+'#comments'"
                                                 target="_blank" th:utext="${commons.article(comment.content)}"></a>
                                         </li>
@@ -102,7 +109,10 @@
                                 </div>
                                 <div class="panel-body">
                                     <ul class="list-group" >
+                                        <!--/*@thymesVar id="logs" type="java.util.List"*/-->
+                                        <!--/*@thymesVar id="log" type="top.yuyg.blog.model.Vo.LogVo"*/-->
                                         <li class="list-group-item" th:each="log : ${logs}">
+                                            <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                             <span th:text="${commons.fmtdate(log.created, 'yyyy-MM-dd HH:mm:ss')} +' => '+ ${log.action}"></span>
                                         </li>
                                     </ul>

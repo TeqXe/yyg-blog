@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="comments">
 <body>
+<!--/*@thymesVar id="article" type="top.yuyg.blog.model.Vo.ContentVo"*/-->
 <div th:if="${article}!=null">
     <div th:id="${article.cid ?: 0}" class="comment-container">
         <div id="comments" class="clearfix">
@@ -16,6 +17,7 @@
                       onsubmit="return TaleComment.subComment();">
                     <input type="hidden" name="coid" id="coid"/>
                     <input type="hidden" name="cid" id="cid" th:value="${article.cid}"/>
+                    <!--/*@thymesVar id="_csrf_token" type="java.lang.String"*/-->
                     <input type="hidden" name="_csrf_token" th:value="${_csrf_token}"/>
                     <input type="text" name="author" maxlength="12" id="author"
                            class="form-control input-control clearfix"
@@ -37,14 +39,17 @@
                 <span class="response">评论已关闭.</span>
             </div>
 
+            <!--/*@thymesVar id="comments" type="com.github.pagehelper.PageInfo"*/-->
             <div th:if="${comments}">
                 <ol class="comment-list">
                     <th:block th:each="comment :${comments.list}">
+                        <!--/*@thymesVar id="comment" type="top.yuyg.blog.model.Vo.CommentVo"*/-->
                         <li th:id="'li-comment-'+${comment.coid}" class="comment-body comment-parent comment-odd">
                             <div th:id="'comment-'+${comment.coid}">
                                 <div class="comment-view" onclick="">
                                     <div class="comment-header">
                                         <!--设置get请求的参数-->
+                                        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                         <img class="avatar"
                                              th:src="@{${commons.gravatar(comment.mail)}(s='80',r='G',d='')}"
                                              th:title="${comment.author}"
@@ -56,9 +61,11 @@
                                     </div>
                                     <div class="comment-content">
                                         <span class="comment-author-at"></span>
+                                        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                         <p th:utext="${commons.article(comment.content)}"></p>
                                     </div>
                                     <div class="comment-meta">
+                                        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                         <time class="comment-time" th:text="${commons.fmtdate(comment.created)}"></time>
                                         <span class="comment-reply">
                             </span>
@@ -74,7 +81,7 @@
                             <li class="prev"><a th:href="'?cp='+${comments.prePage}+'#comments'">←</a></li>
                         </th:block>
                         <th:block th:each="navIndex : ${comments.navigatepageNums}">
-                            <li th:class="${comments.pageNum}==${navIndex}?'current':''"><a
+                            <li th:class="${comments.pageNum == navIndex}? 'current':''"><a
                                     th:href="'?cp='+${navIndex}+'#comments'" th:text="${navIndex}"></a>
                             </li>
                         </th:block>

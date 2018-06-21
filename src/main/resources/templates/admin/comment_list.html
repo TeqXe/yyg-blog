@@ -25,13 +25,17 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <!--/*@thymesVar id="comments" type="com.github.pagehelper.PageInfo"*/-->
+                            <!--/*@thymesVar id="comment" type="top.yuyg.blog.model.Vo.CommentVo"*/-->
                             <th:block th:each="comment : ${comments.list}">
                                 <tr th:attr="cid=${comment.coid}">
                                     <td>
+                                        <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                         <a th:href="@{${commons.site_url('/article/')}+${comment.cid}+'#comments'}"
                                            target="_blank" th:utext="${commons.article(comment.content)}"></a>
                                     </td>
                                     <td th:text="${comment.author}"></td>
+                                    <!--/*@thymesVar id="commons" type="top.yuyg.blog.utils.Commons"*/-->
                                     <td th:text="${commons.fmtdate(comment.created, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                     <td th:text="${comment.mail}"></td>
                                     <td><a th:href="@{${comment.url}}" target="_blank" th:text="${comment.url}"></a>
@@ -59,6 +63,7 @@
                             </th:block>
                             </tbody>
                         </table>
+                        <!--/*@thymesVar id="comments" type="com.github.pagehelper.PageInfo"*/-->
                         <div th:replace="comm/macros :: pageAdminNav(${comments})"></div>
                     </div>
                 </div>
