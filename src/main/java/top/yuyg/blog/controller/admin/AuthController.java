@@ -88,15 +88,15 @@ public class AuthController extends BaseController {
             }
             return RestResponseBo.fail(msg);
         }
-        //若登录IP不在白名单内，则发送邮件通知 at 2018/6/9
-        if(checkIfSendEmail(username,request)){
-            mailService.sendSimple(receive,"网站登录提醒","您的网站YUYG.TOP管理后台在IP为："+ IPKit.getIpAddrByRequest(request)+"的主机上登录，若非本人操作，请及时修改密码！");
-        }
         //校验验证码
         if(StringUtil.isEmpty(captcha)){
             return RestResponseBo.fail("验证码输入为空，请输入验证码！");
         } else if(!captcha.equals(request.getSession().getAttribute("smsCode"))) {
             return RestResponseBo.fail("验证码错误！");
+        }
+        //若登录IP不在白名单内，则发送邮件通知 at 2018/6/9
+        if(checkIfSendEmail(username,request)){
+            mailService.sendSimple(receive,"网站登录提醒","您的网站YUYG.TOP管理后台在IP为："+ IPKit.getIpAddrByRequest(request)+"的主机上登录，若非本人操作，请及时修改密码！");
         }
         return RestResponseBo.ok();
     }
