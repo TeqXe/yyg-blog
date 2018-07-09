@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="tale_comment">
 <body>
+<script th:src="@{//cdn.bootcss.com/jquery/2.2.3/jquery.min.js}" />
+<script th:src="@{//cdn.bootcss.com/layer/3.1.0/layer.js}" />
 <script type="text/javascript">
     /*<![CDATA[*/
     (function () {
@@ -30,11 +32,13 @@
                     success: function (result) {
                         $('#comment-form input[name=coid]').val('');
                         if (result && result.success) {
-                            alert("评论已提交至后台审核!");
-                            window.location.reload();
+                            // alert("评论已提交至后台审核!");
+                            layer.msg("评论已提交至后台审核,感谢您的评论!",function () {
+                                window.location.reload();
+                            })
                         } else {
                             if (result.msg) {
-                                alert(result.msg);
+                                layer.msg(result.msg);
                             }
                         }
                     }
