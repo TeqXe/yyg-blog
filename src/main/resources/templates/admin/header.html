@@ -35,11 +35,11 @@
         <div class="text-center p-t-10" style="margin: 0 auto;">
             <div class="pull-left" style="padding-left: 10px;">
                 <a th:href="@{/admin/index}">
-                    <h2 style="font-family: 华文行楷;color: #1a2942">钢</h2>
+                    <h1 style="font-family: 华文行楷;color: #1a2942">钢</h1>
                 </a>
             </div>
-            <div class="pull-left" style="padding-left: 10px;">
-                <span style="font-size: 28px; color: #2f353f; line-height: 50px;">YUYG.TOP</span>
+            <div class="pull-left admin-title" style="padding-left: 10px;">
+                <span id="displayBlock" style="font-size: 28px; color: #2f353f; line-height: 50px;">YUYG.TOP</span>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
         <div class="container">
             <div class="">
                 <div class="pull-left">
-                    <button type="button" class="button-menu-mobile open-left">
+                    <button type="button" id="switchBtn" class="button-menu-mobile open-left">
                         <i class="fa fa-bars"></i>
                     </button>
                     <span class="clearfix"></span>
@@ -126,5 +126,19 @@
         <div class="clearfix"></div>
     </div>
 </div>
+<script th:src="@{//cdn.bootcss.com/jquery/2.2.3/jquery.min.js}" />
+<script type="text/javascript">
+    $(function () {
+        $("#switchBtn").on("click",function () {
+            debugger;
+            var aim = $('#displayBlock');
+            if(aim.text()==""){
+                aim.text("YUYG.TOP");
+            }else {
+                aim.text("");
+            }
+        })
+    })
+</script>
 </div>
 </html>
